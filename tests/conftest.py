@@ -2,11 +2,12 @@ import pytest
 
 from payroll.company import Company
 from payroll.employee import Employee
+from payroll.timesheet import TimeSheet
 
 
 @pytest.fixture
 def company():
-    return Company("PyBites", 1.25, 0.25)
+    return Company("PyBites", 1.25, 0.20)
 
 
 @pytest.fixture
@@ -17,13 +18,6 @@ def employees(company):
         start=1
     ):
         employees.append(
-            Employee(i, company, name, i*10_000)
+            Employee(i, name, company, i*10)
         )
-
-    for ceo in employees[:2]:
-        ceo.hourly = False
-        ceo.fixed = 25_000
-    for e in employees[::2]:
-        e.does_saving = True
-    employees[-1].active = False
     return employees

@@ -7,16 +7,14 @@ from .company import Company
 @dataclass
 class Employee:
     id: int
-    company: Company
     name: str
-    salary: int
-    hourly: bool = True
-    fixed: int = 0
+    company: Company
+    hourly_rate: Decimal = 0
+    fixed_rate: Decimal = 0
     active: bool = True
     does_saving: bool = False
-    total_paid: Decimal = 0
 
     def __post_init__(self):
-        if not self.hourly and self.fixed == 0:
+        if self.hourly_rate and self.fixed_rate:
             raise ValueError(
-                "If not hourly employee set a fixed rate")
+                "Employee has either hourly or fixed rate")

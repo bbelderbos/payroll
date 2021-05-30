@@ -8,8 +8,8 @@ from .employee import Employee
 class TimeSheet:
     employee: Employee
     work_hours: int
-    overwork_hours: int
-    vacation_hours: int
+    overwork_hours: int = 0
+    vacation_hours: int = 0
     advancement: Decimal = 0
     saved: Decimal = 0
     due: Decimal = 0
@@ -21,12 +21,12 @@ class TimeSheet:
                 "Only active employees can submit timesheets")
 
     def _calculate_base_pay(self, em):
-        if em.fixed:
-            return em.fixed
-        return self.work_hours * em.salary
+        if em.fixed_rate:
+            return em.fixed_rate
+        return self.work_hours * em.hourly_rate
 
     def _calculate_overwork(self, em):
-        if em.fixed:
+        if em.fixed_rate:
             return 0
         rate = em.company.overwork_rate
         return self.overwork_hours * rate

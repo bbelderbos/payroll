@@ -18,4 +18,4 @@ class Payroll:
     def pay(self):
         for ts in self.timesheets:
             ts.paid = True
-            ts.empoyee.total_paid += ts.due
+            # TODO add entry to payment table
