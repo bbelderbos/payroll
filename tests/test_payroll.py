@@ -10,5 +10,5 @@ def test_payroll(payroll):
                for ts in payroll.timesheets)
     assert all(ts.paid is True
                for ts in payroll.timesheets)
-    assert payroll.log[0].amount == Decimal(500)
-    assert payroll.log[1].amount == approx(Decimal(480))
+    assert payroll.logs[0].amount == Decimal(500)
+    assert payroll.logs[1].amount == approx(Decimal(480))

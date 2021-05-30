@@ -11,7 +11,7 @@ class Payroll:
     month: int
     timesheets: list[TimeSheet]
     created: datetime = None
-    log: list[str] = field(default_factory=list)
+    logs: list[str] = field(default_factory=list)
 
     def __post_init__(self):
         self.created = datetime.now()
@@ -28,4 +28,4 @@ class Payroll:
             pm = Payment(employee=ts.employee,
                          amount=ts.calculate_due(),
                          date_paid=datetime.now())
-            self.log.append(pm)
+            self.logs.append(pm)
