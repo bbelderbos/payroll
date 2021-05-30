@@ -2,12 +2,14 @@ from datetime import datetime
 from dataclasses import dataclass, field
 
 from .payment import Payment
+from .timesheet import TimeSheet
 
 
 @dataclass
 class Payroll:
     year: int
     month: int
+    timesheets: list[TimeSheet]
     created: datetime = None
     log: list[str] = field(default_factory=list)
 
@@ -19,9 +21,9 @@ class Payroll:
         month = str(self.month).zfill(2)
         return f"{self.year}{month}"
 
-    def pay(self, timesheets):
-        for ts in timesheets:
-            ts.payroll = self
+    def pay(self):
+        for ts in self.timesheets:
+            ts.payroll = self.period
             ts.paid = True
             pm = Payment(employee=ts.employee,
                          amount=ts.calculate_due(),

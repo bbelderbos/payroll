@@ -2,7 +2,6 @@ from decimal import Decimal
 from dataclasses import dataclass
 
 from .employee import Employee
-from .payroll import Payroll
 
 
 @dataclass
@@ -12,7 +11,7 @@ class TimeSheet:
     overwork_hours: int = 0
     advancements: Decimal = 0
     paid: bool = False
-    payroll: Payroll = None
+    payroll: str = None
 
     def __post_init__(self):
         self.company = self.employee.company

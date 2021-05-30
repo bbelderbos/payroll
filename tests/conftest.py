@@ -33,11 +33,6 @@ def saving_employee(company):
 
 
 @pytest.fixture
-def payroll():
-    return Payroll(2021, 5)
-
-
-@pytest.fixture
 def timesheet(employee):
     return TimeSheet(employee=employee,
                      hours_worked=10)
@@ -47,3 +42,10 @@ def timesheet(employee):
 def timesheet_with_saves(saving_employee):
     return TimeSheet(employee=saving_employee,
                      hours_worked=10)
+
+
+@pytest.fixture
+def payroll(timesheet, timesheet_with_saves):
+    return Payroll(year=2021, month=5,
+                   timesheets=[timesheet,
+                               timesheet_with_saves])
