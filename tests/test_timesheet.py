@@ -33,3 +33,19 @@ def test_timesheet_with_saved_and_overwork(timesheet_with_saves):
     assert timesheet_with_saves.calculate_saving() == approx(Decimal(120))
     assert timesheet_with_saves.calculate_overwork() == approx(Decimal(180))
     assert timesheet_with_saves.calculate_due() == approx(Decimal(660))
+
+
+def test_timesheet_contractor(timesheet_fixed_rate):
+    assert timesheet_fixed_rate.base_pay == Decimal(3_000)
+    assert timesheet_fixed_rate.calculate_due() == Decimal(3_000)
+
+
+def test_timesheet_contractor_with_saved_and_overwork(contractor,
+                                                      timesheet_fixed_rate):
+    contractor.saves = True
+    timesheet_fixed_rate.overwork_hours = 10
+    assert timesheet_fixed_rate.base_pay == Decimal(3_000)
+    assert timesheet_fixed_rate.calculate_saving() == approx(Decimal(600))
+    # fixed fee != overwork
+    assert timesheet_fixed_rate.calculate_overwork() == Decimal(0)
+    assert timesheet_fixed_rate.calculate_due() == approx(Decimal(2_400))

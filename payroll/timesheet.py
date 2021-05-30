@@ -15,10 +15,15 @@ class TimeSheet:
 
     def __post_init__(self):
         self.company = self.employee.company
-        self.base_pay = (self.employee.hourly_rate *
-                         self.hours_worked)
+        self.base_pay = self._calculate_base_rate()
+
+    def _calculate_base_rate(self):
+        if self.employee.fixed_rate:
+            return self.employee.fixed_rate
+        return self.employee.hourly_rate * self.hours_worked
 
     def calculate_overwork(self):
+        """For fixed rate hourly rate gets zero'd out so will be 0"""
         return (self.employee.hourly_rate *
                 self.company.overwork_rate * self.overwork_hours)
 

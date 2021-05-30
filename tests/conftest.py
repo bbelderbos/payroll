@@ -36,6 +36,15 @@ def saving_employee(company):
 
 
 @pytest.fixture
+def contractor(company):
+    return Employee(
+        name="Jake",
+        company=company,
+        fixed_rate=Decimal(3_000),
+    )
+
+
+@pytest.fixture
 def timesheet(employee):
     return TimeSheet(employee=employee,
                      hours_worked=10)
@@ -45,6 +54,12 @@ def timesheet(employee):
 def timesheet_with_saves(saving_employee):
     return TimeSheet(employee=saving_employee,
                      hours_worked=10)
+
+
+@pytest.fixture
+def timesheet_fixed_rate(contractor):
+    return TimeSheet(employee=contractor,
+                     hours_worked=200)
 
 
 @pytest.fixture
