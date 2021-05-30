@@ -1,6 +1,6 @@
 from .employee import Employee
+from .payment import Payment
 from .timesheet import TimeSheet
-
 
 class Payroll:
 
@@ -8,14 +8,22 @@ class Payroll:
         self.year: int = year
         self.month: int = month
         self.timesheets: list[TimeSheet] = timesheets
-        self.employee_balances = dict[Employee, int]
+        self.payments = list[Payment] = []
+
+    @property
+    def period(self):
+        return f"{self.year}{str(self.month).zfill(2)}"
 
     def calculate(self):
         for ts in self.timesheets:
             ts.calculate_pay()
-            self.balances[ts.employee] = ts.due
 
     def pay(self):
         for ts in self.timesheets:
             ts.paid = True
-            # TODO add entry to payment table
+            self.payments.append(
+                Payment(
+                    self.period,
+                    ts.employee,
+                    ts.due)
+            )
