@@ -2,7 +2,6 @@ import pytest
 
 from payroll.company import Company
 from payroll.employee import Employee
-from payroll.timesheet import TimeSheet
 
 
 @pytest.fixture
