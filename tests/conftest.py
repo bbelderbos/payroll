@@ -10,7 +10,10 @@ from payroll.timesheet import TimeSheet
 
 @pytest.fixture
 def company():
-    return Company("PyBites", Decimal(0.2), Decimal(1.5))
+    return Company(
+        name="PyBites",
+        save_percentage=Decimal(0.2),
+        overwork_rate=Decimal(1.5))
 
 
 @pytest.fixture
@@ -46,6 +49,6 @@ def timesheet_with_saves(saving_employee):
 
 @pytest.fixture
 def payroll(timesheet, timesheet_with_saves):
+    timesheets = [timesheet, timesheet_with_saves]
     return Payroll(year=2021, month=5,
-                   timesheets=[timesheet,
-                               timesheet_with_saves])
+                   timesheets=timesheets)
