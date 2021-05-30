@@ -14,8 +14,8 @@ class Employee:
     saves: bool = False
 
     def __post_init__(self):
-        if self.fixed_rate > 0:
-            self.hourly_rate = Decimal(0)
-        elif self.hourly_rate == 0 and self.fixed_rate == 0:
+        if self.hourly_rate == 0 and self.fixed_rate == 0:
             raise ValueError(
                 "Employee needs to have a regular or a fixed rate")
+        if self.fixed_rate > 0:
+            self.hourly_rate = Decimal(0)
