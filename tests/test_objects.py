@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+import pytest
+
 from payroll.employee import Employee
 
 
@@ -12,6 +14,14 @@ def test_employee(company, employee):
         name='Tim', company=company,
         hourly_rate=Decimal('50'), active=True)
     assert employee == expected
+
+
+def test_employee_validation(company, employee):
+    with pytest.raises(ValueError):
+        Employee(
+            name='Jake', company=company,
+            hourly_rate=Decimal('50'),
+            fixed_rate=Decimal('3_000'))
 
 
 def test_payroll(payroll):

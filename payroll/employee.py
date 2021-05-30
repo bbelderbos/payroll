@@ -9,5 +9,12 @@ class Employee:
     name: str
     company: Company
     hourly_rate: Decimal
+    fixed_rate: Decimal = Decimal(0)
     active: bool = True
     saves: bool = False
+
+    def __post_init__(self):
+        if self.hourly_rate > 0 and self.fixed_rate > 0:
+            raise ValueError(
+                "Employee is either hourly paid or "
+                "has a fixed pay rate")
