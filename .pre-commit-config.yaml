@@ -1,8 +1,8 @@
 repos:
 -   repo: local
     hooks:
-      - id: pylint
-        name: pylint
-        entry: pylint
+      - id: ci
+        name: ci
+        entry: make ci
         language: python
         types: [python]
