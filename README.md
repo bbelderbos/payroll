@@ -26,6 +26,8 @@ To run the tests + mypy + flake8:
 make ci
 ```
 
+(`mypy` takes a little bit of time the first run, then it's fast.)
+
 To make its pass a requirement before committing:
 
 ```
