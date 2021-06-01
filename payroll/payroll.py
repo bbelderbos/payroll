@@ -1,5 +1,6 @@
 from datetime import datetime
 from dataclasses import dataclass
+from typing import Optional
 
 from .payment import Payment
 from .timesheet import TimeSheet
@@ -10,13 +11,13 @@ class Payroll:
     year: int
     month: int
     timesheets: list[TimeSheet]
-    created: datetime = None
+    created: Optional[datetime] = None
 
     def __post_init__(self):
         self.created = datetime.now()
 
     @property
-    def period(self):
+    def period(self) -> str:
         month = str(self.month).zfill(2)
         return f"{self.year}{month}"
 
