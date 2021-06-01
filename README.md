@@ -11,7 +11,7 @@ TODO: actually add DB and web (Flask) layers.
 Create a virtual environment and install the dependencies:
 
 ```
-pip install -r requirements/requirements.txt
+make setup
 ```
 
 To run the tests:
