@@ -3,6 +3,7 @@ from decimal import Decimal
 import pytest
 
 from payroll import Employee
+from payroll import Payroll
 
 
 def test_company(company):
@@ -37,3 +38,9 @@ def test_employee_fixed_rate_zeros_hourly(company):
 def test_payroll(payroll):
     assert payroll.period == "202105"
     assert len(payroll.timesheets) == 2
+
+
+def test_payroll_created_date_is_not_static():
+    pr1 = Payroll(2021, 5, [])
+    pr2 = Payroll(2021, 5, [])
+    assert pr2.created > pr1.created
