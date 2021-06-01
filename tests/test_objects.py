@@ -37,4 +37,3 @@ def test_employee_fixed_rate_zeros_hourly(company):
 def test_payroll(payroll):
     assert payroll.period == "202105"
     assert len(payroll.timesheets) == 2
-    assert len(payroll.logs) == 0

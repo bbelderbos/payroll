@@ -1,5 +1,5 @@
 from datetime import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from .payment import Payment
 from .timesheet import TimeSheet
@@ -11,7 +11,6 @@ class Payroll:
     month: int
     timesheets: list[TimeSheet]
     created: datetime = None
-    logs: list[str] = field(default_factory=list)
 
     def __post_init__(self):
         self.created = datetime.now()
@@ -21,11 +20,13 @@ class Payroll:
         month = str(self.month).zfill(2)
         return f"{self.year}{month}"
 
-    def pay(self):
+    def pay(self) -> list[Payment]:
+        payments = []
         for ts in self.timesheets:
             ts.payroll = self.period
             ts.paid = True
             pm = Payment(employee=ts.employee,
                          amount=ts.calculate_due(),
                          date_paid=datetime.now())
-            self.logs.append(pm)
+            payments.append(pm)
+        return payments
