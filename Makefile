@@ -1,11 +1,14 @@
+.PHONY: lint
 lint:
 	flake8 payroll tests
 
-test:
-	pytest
-
-coverage:
-	pytest --cov=payroll
-
+.PHONY: typing
 typing:
 	mypy payroll tests
+
+.PHONY: test
+test:
+	pytest --cov=payroll
+
+.PHONY: ci
+ci: lint typing test
