@@ -24,6 +24,8 @@ class Payroll:
     def pay(self) -> list[Payment]:
         payments = []
         for ts in self.timesheets:
+            if ts.paid:
+                continue
             ts.payroll = self.period
             ts.paid = True
             pm = Payment(employee=ts.employee,
