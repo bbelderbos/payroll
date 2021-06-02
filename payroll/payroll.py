@@ -27,7 +27,6 @@ class Payroll:
             if ts.paid:
                 continue
             ts.payroll = self.period
-            ts.paid = True
             pm = Payment(employee=ts.employee,
                          amount=ts.calculate_due(),
                          date_paid=datetime.now())

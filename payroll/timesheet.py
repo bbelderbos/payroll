@@ -11,12 +11,15 @@ class TimeSheet:
     hours_worked: int
     overwork_hours: int = 0
     advancements: Decimal = Decimal(0)
-    paid: bool = False
     payroll: Optional[str] = None
 
     def __post_init__(self):
         self.company = self.employee.company
         self.base_pay = self._calculate_base_rate()
+
+    @property
+    def paid(self):
+        return self.payroll is not None
 
     def _calculate_base_rate(self) -> Decimal:
         if self.employee.fixed_rate:
