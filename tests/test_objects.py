@@ -27,12 +27,9 @@ def test_employee_rate_validation(company):
             fixed_rate=Decimal(0))
 
 
-def test_employee_fixed_rate_zeros_hourly(company):
-    employee = Employee(
-        name='Jake', company=company,
-        hourly_rate=Decimal(20),
-        fixed_rate=Decimal(3_000))
-    assert employee.hourly_rate == 0
+def test_contractor_zeros_hourly(contractor):
+    contractor.fixed_rate = Decimal(3_000)
+    assert contractor.hourly_rate == 0
 
 
 def test_payroll(payroll):
