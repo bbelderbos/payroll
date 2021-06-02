@@ -12,6 +12,10 @@ typing:
 
 .PHONY: test
 test:
+	pytest
+
+.PHONY: coverage
+coverage:
 	pytest --cov=payroll
 
 .PHONY: ci
