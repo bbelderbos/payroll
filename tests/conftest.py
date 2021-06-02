@@ -2,10 +2,7 @@ from decimal import Decimal
 
 import pytest
 
-from payroll import Company
-from payroll import Employee
-from payroll import Payroll
-from payroll import TimeSheet
+from payroll import Company, Employee, Payroll, TimeSheet
 
 
 @pytest.fixture

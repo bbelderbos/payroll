@@ -2,8 +2,7 @@ from decimal import Decimal
 
 import pytest
 
-from payroll import Employee
-from payroll import Payroll
+from payroll import Employee, Payroll
 
 
 def test_company(company):
